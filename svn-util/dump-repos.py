@@ -73,6 +73,9 @@ def main(argv):
                 admin_cmd = "svnadmin dump %sold-%s > %s%s-dumpfile" % (backup_dir, dir, backup_dir, dir)
                 print admin_cmd
                 print commands.getoutput(admin_cmd)
+
+                # TODO: you should clean up afterwards
+                # Leftover directories post svnadmin dump
                 
             else:
                 print "not a directory {0:>s}".format(repos)
@@ -83,8 +86,8 @@ def main(argv):
 def usage():
 
     print 'Usage: -p parentdir -b backupdir'
-    print 'specify full paths for parentdir and backupdir with no trailing slashes'
-    print 'iterates repository dir(s), moves the dir(s), and creates a backup from \'svnadmin\' as a batch'
+    print 'Specify full paths for parentdir and backupdir.'
+    print 'Iterates repository dir(s) in parentdir, moves the dir(s) to backupdir, and creates a dumpfile from \'svnadmin\' as a batch'
     print 'use an \'svnadmin\' binary from a release with the same schema version'
 
     sys.exit(0)
