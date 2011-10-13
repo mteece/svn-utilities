@@ -13,7 +13,7 @@ def main(argv):
     as your repository to create a dumpfile of your repository:
     $ mv myrepos old-repos
     $ svnadmin dump old-repos > dumpfile"""
-	
+
     try:
         opts, args = getopt.getopt(sys.argv[1:],"h:p:b:",["help","parentdir","backupdir"])
     except getopt.GetoptError, err:
@@ -53,7 +53,7 @@ def main(argv):
         for object in os.listdir(parent_dir):
             if os.path.isdir(os.path.join(parent_dir, object)):
                 repositories.append(object)
-	
+
     if len(repositories) > 0:
         repositories.sort()
         for dir in repositories:
@@ -65,7 +65,8 @@ def main(argv):
                 # import shutil http://docs.python.org/library/shutil.html
                 #tmp = "%s%s" % (backup_dir, dir)
                 #dest = os.path.normpath(tmp)
-
+                
+                # TODO: Stop using 'old-'
                 copy_cmd = "mv %s %sold-%s" % (repos, backup_dir, dir)
                 print copy_cmd
                 print commands.getoutput(copy_cmd)
@@ -74,7 +75,7 @@ def main(argv):
                 print admin_cmd
                 print commands.getoutput(admin_cmd)
 
-                # TODO: you should clean up afterwards
+                # TODO: You should clean up afterwards
                 # Leftover directories post svnadmin dump
                 
             else:
@@ -85,12 +86,16 @@ def main(argv):
         
 def usage():
 
-    print 'Usage: -p parentdir -b backupdir'
-    print 'Specify full paths for parentdir and backupdir.'
-    print 'Iterates repository dir(s) in parentdir, moves the dir(s) to backupdir, and creates a dumpfile from \'svnadmin\' as a batch'
-    print 'use an \'svnadmin\' binary from a release with the same schema version'
+    print "Usage: -p parentdir -b backupdir"
+    print ""
+    print "$ python dump-repos.py -p /usr/local/svn/repos/ -b /usr/local/svn/backup/"
+    print ""
+    print "Specify full paths for --parentdir and --backupdir."
+    print "Iterates repository dir(s) in parentdir, moves the dir(s) to backupdir, and creates a dumpfile from \'svnadmin\' as a batch."
+    print "Use an \'svnadmin\' binary from a release with the same schema version."
+    print "To revert changes run load-repos.py"
 
     sys.exit(0)
-	
+
 if __name__=="__main__":
     main( sys.argv )

@@ -7,6 +7,7 @@ A set of simple python scripts to assist with SVN administration.
 ###Utilities
 
  * dump-repos.py
+ * load-repos.py
 
 ##Requirements
 
