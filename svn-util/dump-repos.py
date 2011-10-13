@@ -93,7 +93,7 @@ def usage():
     print "Specify full paths for --parentdir and --backupdir."
     print "Iterates repository dir(s) in parentdir, moves the dir(s) to backupdir, and creates a dumpfile from \'svnadmin\' as a batch."
     print "Use an \'svnadmin\' binary from a release with the same schema version."
-    print "To revert changes run load-repos.py"
+    print "To revert repository changes and restore run load-repos.py."
 
     sys.exit(0)
 
